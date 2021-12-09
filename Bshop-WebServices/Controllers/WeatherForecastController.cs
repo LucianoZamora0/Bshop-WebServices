@@ -30,8 +30,8 @@ namespace Bshop_WebServices.Controllers
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                TemperatureC = rng.Next(-20, 54),
+                Summary = Summaries[rng.Next(Summaries.Length)] 
             })
             .ToArray();
         }
