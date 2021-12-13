@@ -122,16 +122,22 @@ namespace Bshop_WebServices.Repository.Implementation
             return -1;
         }
 
-        public async Task<ICollection<Product>> GetByCategory(int category, int start, int end)
+        public async Task<ICollection<Product>> GetByCategory(List<int> categories, int start, int end)
         {
             try
             {
+                string categoriesQuery = "(";
+                foreach(var x in categories)
+                {
+                    categoriesQuery += x + ",";
+                }
 
+                string categoriesQuery2 = categoriesQuery.Remove(categoriesQuery.Length - 1) + ")";
                 ICollection<Product> products = new List<Product>();
                 MySqlConnection connection = _instance.Instance(_config);
                 string query = $"SELECT id, name, url_image, price, discount, category " +
                                $"FROM {_TableName} " +
-                               $"WHERE category = {category} " +
+                               $"WHERE category in {categoriesQuery2} " +
                                $"LIMIT {end - start} OFFSET {start}";
                 var reader = await _instance.ExecutePetition(query, connection);
 
@@ -159,16 +165,22 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
-        public async Task<int> GetByCategoryCount(int category)
+        public async Task<int> GetByCategoryCount(List<int> categories)
         {
             try
             {
+                string categoriesQuery = "(";
+                foreach (var x in categories)
+                {
+                    categoriesQuery += x + ",";
+                }
 
+                string categoriesQuery2 = categoriesQuery.Remove(categoriesQuery.Length -1) + ")";
                 ICollection<Product> products = new List<Product>();
                 MySqlConnection connection = _instance.Instance(_config);
                 string query = $"SELECT COUNT(*)  as total " +
                                $"FROM {_TableName} " +
-                               $"WHERE category = {category} ";
+                               $"WHERE category in {categoriesQuery2} ";
                 var reader = await _instance.ExecutePetition(query, connection);
                 int total = 0;
                 while (reader.Read())
@@ -187,20 +199,26 @@ namespace Bshop_WebServices.Repository.Implementation
             return -1;
         }
 
-        public async Task<ICollection<Product>> GetByFilters(int category, int minPrice, int maxPrice, int start, int end)
+        public async Task<ICollection<Product>> GetByFilters(List<int> categories, int minPrice, int maxPrice, int start, int end)
         {
             try
             {
-
                 ICollection<Product> products = new List<Product>();
                 MySqlConnection connection = _instance.Instance(_config);
                 string query = $"SELECT id, name, url_image, price, discount, category " +
                                $"FROM {_TableName} " +
                                $"WHERE price between {minPrice} AND {maxPrice} ";
 
-                if(category != -1)
+                if(categories.Count != 0)
                 {
-                    query += $"AND category = {category} ";
+                    string categoriesQuery = "(";
+                    foreach (var x in categories)
+                    {
+                        categoriesQuery += x + ",";
+                    }
+
+                    string categoriesQuery2 = categoriesQuery.Remove(categoriesQuery.Length - 1) + ")";
+                    query += $"AND category in {categoriesQuery2} ";
                 }
                 query += $"LIMIT {end - start} OFFSET {start}";
 
@@ -231,7 +249,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
-        public async Task<int> GetByFiltersCount(int category, int minPrice, int maxPrice)
+        public async Task<int> GetByFiltersCount(List<int> categories, int minPrice, int maxPrice)
         {
             try
             {
@@ -240,9 +258,16 @@ namespace Bshop_WebServices.Repository.Implementation
                                $"FROM {_TableName} " +
                                $"WHERE price between {minPrice} AND {maxPrice} ";
 
-                if (category != -1)
+                if (categories.Count != 0)
                 {
-                    query += $"AND category = {category} ";
+                    string categoriesQuery = "(";
+                    foreach (var x in categories)
+                    {
+                        categoriesQuery += x + ",";
+                    }
+
+                    string categoriesQuery2 = categoriesQuery.Remove(categoriesQuery.Length - 1) + ")";
+                    query += $"AND category in {categoriesQuery2} ";
                 }
 
 
@@ -318,7 +343,7 @@ namespace Bshop_WebServices.Repository.Implementation
 
                 while (reader.Read())
                 {
-                    total = int.Parse(reader["id"].ToString());
+                    total = int.Parse(reader["total"].ToString());
                 }
 
                 connection.Close();

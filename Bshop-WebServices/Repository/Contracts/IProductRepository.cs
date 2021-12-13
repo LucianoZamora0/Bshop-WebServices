@@ -18,13 +18,13 @@ namespace Bshop_WebServices.Repository.Contracts
         /*LLamado para obtener el total de productos*/
         Task<int> GetAllCount();
         /*LLamado para obtener todos los productos por categoria*/
-        Task<ICollection<Product>> GetByCategory(int category, int start, int end);
+        Task<ICollection<Product>> GetByCategory(List<int> categories, int start, int end);
         /*LLamado para obtener el total de productos por categoria*/
-        Task<int> GetByCategoryCount(int category);
+        Task<int> GetByCategoryCount(List<int> categories);
         /*LLamado para obtener todos los productos por filtro de categoria o precio*/
-        Task<ICollection<Product>> GetByFilters(int category, int minPrice, int maxPrice, int start, int end);
+        Task<ICollection<Product>> GetByFilters(List<int> categories, int minPrice, int maxPrice, int start, int end);
         /*LLamado para obtener el total de productos por filtro de categoria o precio*/
-        Task<int> GetByFiltersCount(int category, int minPrice, int maxPrice);
+        Task<int> GetByFiltersCount(List<int> categories, int minPrice, int maxPrice);
         /*LLamado para obtener todos los productos por texto ingresado en la busqueda*/
         Task<ICollection<Product>> GetBySearch(string name, int start, int end);
         /*LLamado para obtener el numero de productos que entrega la busqueda por texto ingresado*/

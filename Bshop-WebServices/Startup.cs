@@ -19,6 +19,8 @@ namespace Bshop_WebServices
 {
     public class Startup
     {
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +32,15 @@ namespace Bshop_WebServices
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("*");
+                                  });
+            });
 
             // Configuración de las diferentes secciones
             services.Configure<ServicesConfig>(Configuration.GetSection("ServicesConfig"));
@@ -54,9 +65,13 @@ namespace Bshop_WebServices
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BShopAPI v1"));
             }
 
+            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
