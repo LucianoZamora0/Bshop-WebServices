@@ -26,6 +26,7 @@ namespace Bshop_WebServices.Repository.Implementation
             _config = config.Value;
         }
 
+        /*Accion para consultar por las categorias almacenadas*/
         public async Task<ICollection<Category>> GetAll()
         {
             try

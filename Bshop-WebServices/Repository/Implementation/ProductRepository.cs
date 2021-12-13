@@ -27,6 +27,7 @@ namespace Bshop_WebServices.Repository.Implementation
             _config = config.Value;
         }
 
+        /*Accion para consultar por un producto dado una id*/
         public async  Task<Product> Get(int id)
         {
             try
@@ -60,6 +61,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
+        /*Accion para consultar por productos dado un rango de busqueda*/
         public async Task<ICollection<Product>> GetAll(int start, int end)
         {
             try
@@ -96,6 +98,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
+        /*Accion para consultar total de productos almacenados*/
         public async Task<int> GetAllCount()
         {
             try
@@ -122,6 +125,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return -1;
         }
 
+        /*Accion para consultar por productos dado una lista de categorias y rango de busqueda*/
         public async Task<ICollection<Product>> GetByCategory(List<int> categories, int start, int end)
         {
             try
@@ -165,6 +169,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
+        /*Accion para consultar por total de productos dado una lista de categorias y rango de busqueda*/
         public async Task<int> GetByCategoryCount(List<int> categories)
         {
             try
@@ -199,6 +204,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return -1;
         }
 
+        /*Accion para consultar por productos dado una lista de categorias, rango de precio y rango de busqueda*/
         public async Task<ICollection<Product>> GetByFilters(List<int> categories, int minPrice, int maxPrice, int start, int end)
         {
             try
@@ -249,6 +255,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
+        /*Accion para consultar por el totla de productos dado una lista de categorias, rango de precio y rango de busqueda*/
         public async Task<int> GetByFiltersCount(List<int> categories, int minPrice, int maxPrice)
         {
             try
@@ -292,6 +299,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return -1;
         }
 
+        /*Accion para consultar por productos dado un texto plano y rango de busqueda*/
         public async Task<ICollection<Product>> GetBySearch(string text, int start, int end)
         {
             try
@@ -329,6 +337,7 @@ namespace Bshop_WebServices.Repository.Implementation
             return null;
         }
 
+        /*Accion para consultar por el total de  productos dado un texto plano y rango de busqueda*/
         public async Task<int> GetBySearchCount(string text)
         {
             try

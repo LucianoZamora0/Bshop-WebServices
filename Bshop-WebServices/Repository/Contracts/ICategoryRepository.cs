@@ -11,6 +11,7 @@ namespace Bshop_WebServices.Repository.Contracts
      */
     public interface ICategoryRepository
     {
+        /*LLamado para obtener todas las categorias de la bd*/
         Task<ICollection<Category>> GetAll();
     }
 }

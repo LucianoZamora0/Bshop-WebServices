@@ -27,7 +27,7 @@ namespace Bshop_WebServices.Controllers
             _logger = logger;
         }
 
-
+        /*permite obtener todas las categorias almacenadas*/
         [HttpGet]
         [Route("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<Category>))]

@@ -9,11 +9,14 @@ using MySql.Data.MySqlClient;
 
 namespace Bshop_WebServices.Helpers
 {
+    /*Clase que permite generar una conexion a la bd*/
     public class InstanceGenerator
     {
 
         private static MySqlConnection _Connection { get; set; }
         ILogger<InstanceGenerator> _logger;
+
+        /*Permite generar una instancia de conexion con la base de datos*/
         public MySqlConnection Instance(ServicesConfig config)
         {
             try
@@ -34,6 +37,7 @@ namespace Bshop_WebServices.Helpers
             return null;
         }
 
+        /*Permite realizar una consulta a la conexion dada una instancia y la respectiva query*/
         public async Task<DbDataReader> ExecutePetition(string query, MySqlConnection connection)
         {
             try

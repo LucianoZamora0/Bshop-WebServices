@@ -27,7 +27,7 @@ namespace Bshop_WebServices.Controllers
             _logger = logger;
         }
 
-
+        /* Permite obtener un producto dado un id*/
         [HttpGet]
         [Route("Get")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Product))]
@@ -36,6 +36,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.Get(id);
         }
 
+        /* Permite obtener todos los productos dado rango de busqueda*/
         [HttpGet]
         [Route("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<Product>))]
@@ -44,6 +45,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetAll(start, end);
         }
 
+        /* Permite obtener total de productos almacenados*/
         [HttpGet]
         [Route("GetAllCount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
@@ -52,6 +54,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetAllCount();
         }
 
+        /* Permite obtener productos dado un listado de categorias y rango de busqueda */
         [HttpGet]
         [Route("GetByCategory")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<Product>))]
@@ -62,6 +65,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetByCategory(cat2, start, end);
         }
 
+        /* Permite obtener el total de productos dado un listado de categorias y rango de busqueda */
         [HttpGet]
         [Route("GetByCategoryCount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
@@ -72,6 +76,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetByCategoryCount(cat2);
         }
 
+        /* Permite obtener productos dado un listado de categorias, rango de precios y rango de busqueda */
         [HttpGet]
         [Route("GetByFilters")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<Product>))]
@@ -82,6 +87,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetByFilters(cat2,minPrice, maxPrice, start, end);
         }
 
+        /* Permite obtener total de productos dado un listado de categorias, rango de precios y rango de busqueda */
         [HttpGet]
         [Route("GetByFiltersCount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
@@ -92,6 +98,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetByFiltersCount(cat2, minPrice, maxPrice);
         }
 
+        /* Permite obtener productos dado texto ingresado y rango de busqueda*/
         [HttpGet]
         [Route("GetBySearch")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<Product>))]
@@ -100,6 +107,7 @@ namespace Bshop_WebServices.Controllers
             return await _repository.GetBySearch(text, start, end);
         }
 
+        /* Permite obtener total de productos dado texto ingresado y rango de busqueda*/
         [HttpGet]
         [Route("GetBySearchCount")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
